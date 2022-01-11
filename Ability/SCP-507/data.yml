@@ -1,0 +1,8 @@
+id: 'LA-SCP-507'
+type: 'SCP'
+name: '마지못한 차원 이동자'
+rank: 'B'
+description: | 
+    §7[SCP-507] http://scpko.wikidot.com/scp-507
+    §a1분~5분 주기로 무작위 위치로 이동합니다.
+    지정되는 위치는 생존 플레이어들의 20칸 내외입니다.

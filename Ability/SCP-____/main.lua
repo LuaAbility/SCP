@@ -1,0 +1,1 @@
+function Init(abilityData) end
