@@ -1,45 +1,59 @@
-function Init(abilityData) end
+local material = import("$.Material")
 
-function onTimer(player, ability) 
-	math.randomseed(os.time())
-	if player:getVariable("SCP507-passiveCount") == nil then 
-		player:setVariable("SCP507-passiveCount", 0) 
-		player:setVariable("SCP507-randomPassive", math.random(1200, 6000)) 
-	end
-	local count = player:getVariable("SCP507-passiveCount")
-	local maxCount = player:getVariable("SCP507-randomPassive")
-	if count >= maxCount then 
-		count = 0
-		shuffle(player)
-		player:setVariable("SCP507-randomPassive", math.random(1200, 6000)) 
-	end
-	count = count + 2
-	player:setVariable("SCP507-passiveCount", count)
+function Init(abilityData)
+	plugin.registerEvent(abilityData, "SCP650-teleport", "PlayerInteractEvent", 1200)
 end
 
-function shuffle(player) 
-	local players = util.getTableFromList(game.getPlayers())
-	
-	for i = 1, 100 do
-		math.randomseed(os.time())
-		local randomIndex = math.random(1, #players)
-		local temp = players[randomIndex]
-		players[randomIndex] = players[1]
-		players[1] = temp
-	end
-	
-	for i = 1, #players do
-		if players[i] ~= player then
-			local loc = players[i]:getPlayer():getLocation():add(math.random(-10, 10), 0, math.random(-10, 10))
-			if checkMat(loc:getWorld():getBlockAt(loc:add(0, 1, 0)):getType()) or checkMat(loc:getWorld():getBlockAt(loc:add(0, 2, 0)):getType()) then
-				loc:setY(loc:getWorld():getHighestBlockYAt(loc:getX(), loc:getZ()))
+function onEvent(funcTable)
+	if funcTable[1] == "SCP650-teleport" then seeCheck(funcTable[3], funcTable[2], funcTable[4], funcTable[1]) end
+end
+
+function seeCheck(LAPlayer, event, ability, id)
+	if event:getAction():toString() == "RIGHT_CLICK_AIR" or event:getAction():toString() == "RIGHT_CLICK_BLOCK" then
+		if event:getItem() ~= nil then
+			if game.isAbilityItem(event:getItem(), "IRON_INGOT") then
+				if game.checkCooldown(LAPlayer, game.getPlayer(event:getPlayer()), ability, id) then
+					local players = util.getTableFromList(game.getPlayers())
+					
+					for i = 1, #players do
+						if not players[i]:getPlayer():isDead() and getLookingAt(event:getPlayer(), players[i]:getPlayer(), 0.7) then
+							if teleportToBack(players[i]:getPlayer(), event:getPlayer()) then return 0
+							else game.sendMessage(event:getPlayer(), "§4[§cSCP-650§4] §c플레이어 뒤에 블럭이 있어 이동 할 수 없습니다.") ability:resetCooldown(id) end
+						end
+					end
+				end
 			end
-			
-			game.sendMessage(player:getPlayer(), "§2[§aSCP-507§2] §a무작위 위치로 이동합니다.")
-			player:getPlayer():teleport(loc)
-			return 0
 		end
 	end
+end
+
+function teleportToBack(target, player)
+	local targetLoc = target:getLocation()
+	targetLoc:setPitch(0)
+	
+	local startDir = targetLoc:getDirection():setY(0):normalize()
+	local horizonOffset = newInstance("$.util.Vector", {startDir:getZ() * -1, 0, startDir:getX()}):normalize()
+	targetLoc:add(targetLoc:getDirection():setY(0):multiply(-1))
+		
+	if checkMat(targetLoc:getWorld():getBlockAt(targetLoc):getType()) or checkMat(targetLoc:getWorld():getBlockAt(targetLoc:add(0, 1, 0)):getType()) then 
+		return false 
+	end
+	
+	player:teleport(targetLoc:add(0, -1, 0))
+	return true 
+end
+
+function getLookingAt(player, player1, checkDouble)
+	local eye = player:getEyeLocation()
+	local toEntity = player1:getEyeLocation():toVector():subtract(eye:toVector())
+	local dot = toEntity:normalize():dot(eye:getDirection())
+	
+	if player:getWorld():getEnvironment() ~= player1:getWorld():getEnvironment() then dot = 0
+	elseif player:getPlayer():getLocation():distance(player1:getLocation()) > 40 then dot = 0 end
+
+	if not player:hasLineOfSight(player1) then dot = 0 end
+	
+	return dot > checkDouble
 end
 
 function checkMat(mat)

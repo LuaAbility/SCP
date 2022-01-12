@@ -1,0 +1,8 @@
+id: 'LA-SCP-650'
+type: 'SCP'
+name: '깜짝 조각상'
+rank: 'A'
+description: | 
+    §7[SCP-650] http://scpko.wikidot.com/scp-650
+    §a철괴를 들고 상대방을 바라본 뒤 우 클릭 시 상대방의 뒤로 이동합니다. (재사용 대기시간 : 1분)
+    이동 시에는 아무런 이펙트도 나타나지 않습니다.
