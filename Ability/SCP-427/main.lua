@@ -12,7 +12,7 @@ function onTimer(player, ability)
 	math.randomseed(os.time())
 	if player:getVariable("SCP427-count") == nil then 
 		player:setVariable("SCP427-count", 0) 
-		player:setVariable("SCP427-maxCount", math.random(5, 8)) 
+		player:setVariable("SCP427-maxCount", util.random(5, 8)) 
 	end
 	
 	local count = player:getVariable("SCP427-count")
