@@ -1,7 +1,7 @@
 function Init(abilityData) end
 
 function onTimer(player, ability) 
-	math.randomseed(os.time())
+	
 	if player:getVariable("SCP507-passiveCount") == nil then 
 		player:setVariable("SCP507-passiveCount", 0) 
 		player:setVariable("SCP507-randomPassive", util.random(1200, 6000)) 
@@ -21,7 +21,7 @@ function shuffle(player)
 	local players = util.getTableFromList(game.getPlayers())
 	
 	for i = 1, 100 do
-		math.randomseed(os.time())
+		
 		local randomIndex = util.random(1, #players)
 		local temp = players[randomIndex]
 		players[randomIndex] = players[1]

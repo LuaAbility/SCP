@@ -9,7 +9,7 @@ function onEvent(funcTable)
 end
 
 function onTimer(player, ability)
-	math.randomseed(os.time())
+	
 	if player:getVariable("SCP427-count") == nil then 
 		player:setVariable("SCP427-count", 0) 
 		player:setVariable("SCP427-maxCount", util.random(5, 8)) 
