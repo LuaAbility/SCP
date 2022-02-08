@@ -19,7 +19,8 @@ function onTimer(player, ability)
 	if count >= 7 then game.sendActionBarMessage(player:getPlayer(), "§a능력 사용 횟수 §6: §4" .. player:getVariable("SCP427-count") .. "회")
 	elseif count >= 4 then game.sendActionBarMessage(player:getPlayer(), "§a능력 사용 횟수 §6: §c" .. player:getVariable("SCP427-count") .. "회")
 	else game.sendActionBarMessage(player:getPlayer(), "§a능력 사용 횟수 §6: §b" .. player:getVariable("SCP427-count") .. "회") end
-	player:getPlayer():setFoodLevel(10)
+	player:getPlayer():setSaturatedRegenRate(0)
+	player:getPlayer():setUnsaturatedRegenRate(0)
 end
 
 function heal(LAPlayer, event, ability, id)

@@ -1,5 +1,5 @@
 function Init(abilityData)
-	plugin.registerEvent(abilityData, "SCP055-enableAbility", "PlayerInteractEvent", 6000)
+	plugin.registerEvent(abilityData, "SCP055-enableAbility", "PlayerInteractEvent", 2400)
 end
 
 function onEvent(funcTable)
@@ -21,14 +21,16 @@ function onTimer(player, ability)
 end
 
 function Reset(player, ability)
-	if player:getVariable("SCP055-useAbility") > 0 then unlockAbility(player) end
+	if player:getVariable("SCP055-useAbility") ~= nil and player:getVariable("SCP055-useAbility") > 0 then unlockAbility(player) end
 end
 
 function seeCheck(player)
 	local players = util.getTableFromList(game.getPlayers())
 	
 	for i = 1, #players do
-		if not players[i]:getPlayer():isDead() and getLookingAt(players[i]:getPlayer(), player:getPlayer()) then players[i]:setVariable("abilityLock", true) 
+		if not players[i]:getPlayer():isDead() and getLookingAt(players[i]:getPlayer(), player:getPlayer()) then 
+			players[i]:setVariable("abilityLock", true) 
+			game.sendActionBarMessage(players[i]:getPlayer(), "§c능력 봉인됨!")
 		else players[i]:setVariable("abilityLock", false) end
 	end
 end

@@ -4,14 +4,14 @@ function onTimer(player, ability)
 	
 	if player:getVariable("SCP507-passiveCount") == nil then 
 		player:setVariable("SCP507-passiveCount", 0) 
-		player:setVariable("SCP507-randomPassive", util.random(1200, 6000)) 
+		player:setVariable("SCP507-randomPassive", util.random(1200, 3600)) 
 	end
 	local count = player:getVariable("SCP507-passiveCount")
 	local maxCount = player:getVariable("SCP507-randomPassive")
 	if count >= maxCount then 
 		count = 0
 		shuffle(player)
-		player:setVariable("SCP507-randomPassive", util.random(1200, 6000)) 
+		player:setVariable("SCP507-randomPassive", util.random(1200, 3600)) 
 	end
 	count = count + 2
 	player:setVariable("SCP507-passiveCount", count)

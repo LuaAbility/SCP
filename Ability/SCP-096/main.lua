@@ -11,7 +11,7 @@ end
 function onTimer(player, ability)
 	if player:getVariable("SCP096-passiveCount") == nil then 
 		player:setVariable("SCP096-passiveCount", 0)
-		player:setVariable("SCP096-targetPlayerName", nil)
+		player:setVariable("SCP096-targetPlayerName", "")
 	end
 	
 	local count = player:getVariable("SCP096-passiveCount")
