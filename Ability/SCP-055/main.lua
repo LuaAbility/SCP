@@ -1,9 +1,9 @@
 function Init(abilityData)
-	plugin.registerEvent(abilityData, "SCP055-enableAbility", "PlayerInteractEvent", 2400)
+	plugin.registerEvent(abilityData, "능력 봉인", "PlayerInteractEvent", 2400)
 end
 
 function onEvent(funcTable)
-	if funcTable[1] == "SCP055-enableAbility" then enableAbility(funcTable[3], funcTable[2], funcTable[4], funcTable[1]) end
+	if funcTable[1] == "능력 봉인" then enableAbility(funcTable[3], funcTable[2], funcTable[4], funcTable[1]) end
 end
 
 function onTimer(player, ability)
@@ -36,7 +36,7 @@ function seeCheck(player)
 end
 
 function unlockAbility(player)
-	game.sendMessage(player:getPlayer(), "§2[§aSCP-055§2] §a능력 시전 시간이 종료되었습니다.")
+	game.sendMessage(player:getPlayer(), "§2[§aSCP-055§2] §a능력 시전 시간이 종료되었습니다. (능력 봉인)")
 	player:getPlayer():getWorld():spawnParticle(import("$.Particle").SMOKE_LARGE, player:getPlayer():getLocation():add(0,1,0), 100, 0.5, 1, 0.5, 0.2)
 	player:getPlayer():getWorld():playSound(player:getPlayer():getLocation(), import("$.Sound").BLOCK_BEACON_ACTIVATE, 0.5, 1)
 	local players = util.getTableFromList(game.getPlayers())

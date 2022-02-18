@@ -1,11 +1,11 @@
 local material = import("$.Material")
 
 function Init(abilityData)
-	plugin.registerEvent(abilityData, "SCP650-teleport", "PlayerInteractEvent", 1200)
+	plugin.registerEvent(abilityData, "깜짝 이동", "PlayerInteractEvent", 1200)
 end
 
 function onEvent(funcTable)
-	if funcTable[1] == "SCP650-teleport" then seeCheck(funcTable[3], funcTable[2], funcTable[4], funcTable[1]) end
+	if funcTable[1] == "깜짝 이동" then seeCheck(funcTable[3], funcTable[2], funcTable[4], funcTable[1]) end
 end
 
 function seeCheck(LAPlayer, event, ability, id)

@@ -1,15 +1,14 @@
 local attribute = import("$.attribute.Attribute")
 
 function Init(abilityData)
-	plugin.registerEvent(abilityData, "SCP427-heal", "PlayerInteractEvent", 1200)
+	plugin.registerEvent(abilityData, "회복", "PlayerInteractEvent", 1200)
 end
 
 function onEvent(funcTable)
-	if funcTable[1] == "SCP427-heal" then heal(funcTable[3], funcTable[2], funcTable[4], funcTable[1]) end
+	if funcTable[1] == "회복" then heal(funcTable[3], funcTable[2], funcTable[4], funcTable[1]) end
 end
 
 function onTimer(player, ability)
-	
 	if player:getVariable("SCP427-count") == nil then 
 		player:setVariable("SCP427-count", 0) 
 		player:setVariable("SCP427-maxCount", util.random(5, 8)) 
@@ -19,8 +18,8 @@ function onTimer(player, ability)
 	if count >= 7 then game.sendActionBarMessage(player:getPlayer(), "§a능력 사용 횟수 §6: §4" .. player:getVariable("SCP427-count") .. "회")
 	elseif count >= 4 then game.sendActionBarMessage(player:getPlayer(), "§a능력 사용 횟수 §6: §c" .. player:getVariable("SCP427-count") .. "회")
 	else game.sendActionBarMessage(player:getPlayer(), "§a능력 사용 횟수 §6: §b" .. player:getVariable("SCP427-count") .. "회") end
-	player:getPlayer():setSaturatedRegenRate(0)
-	player:getPlayer():setUnsaturatedRegenRate(0)
+	player:getPlayer():setSaturatedRegenRate(99999999999)
+	player:getPlayer():setUnsaturatedRegenRate(99999999999)
 end
 
 function heal(LAPlayer, event, ability, id)

@@ -1,9 +1,9 @@
 function Init(abilityData)
-	plugin.registerEvent(abilityData, "SCP049-changeAbility", "EntityDamageEvent", 24000)
+	plugin.registerEvent(abilityData, "치료", "EntityDamageEvent", 24000)
 end
 
 function onEvent(funcTable)
-	if funcTable[1] == "SCP049-changeAbility" and funcTable[2]:getEventName() == "EntityDamageByEntityEvent" then gamble(funcTable[3], funcTable[2], funcTable[4], funcTable[1]) end
+	if funcTable[1] == "치료" and funcTable[2]:getEventName() == "EntityDamageByEntityEvent" then gamble(funcTable[3], funcTable[2], funcTable[4], funcTable[1]) end
 end
 
 function gamble(LAPlayer, event, ability, id)

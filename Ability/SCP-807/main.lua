@@ -3,11 +3,11 @@ local effect = import("$.potion.PotionEffectType")
 
 function Init(abilityData)
 	plugin.registerEvent(abilityData, "SCP807-panelty", "PlayerItemConsumeEvent", 0)
-	plugin.registerEvent(abilityData, "SCP807-reinforce", "PlayerInteractEvent", 600)
+	plugin.registerEvent(abilityData, "아이템 변환", "PlayerInteractEvent", 600)
 end
 
 function onEvent(funcTable)
-	if funcTable[1] == "SCP807-reinforce" then reinforce(funcTable[3], funcTable[2], funcTable[4], funcTable[1]) end
+	if funcTable[1] == "아이템 변환" then reinforce(funcTable[3], funcTable[2], funcTable[4], funcTable[1]) end
 	if funcTable[1] == "SCP807-panelty" then panelty(funcTable[3], funcTable[2], funcTable[4], funcTable[1]) end
 end
 
