@@ -28,7 +28,7 @@ function seeCheck(player)
 	local players = util.getTableFromList(game.getPlayers())
 	
 	for i = 1, #players do
-		if not players[i]:getPlayer():isDead() and getLookingAt(players[i]:getPlayer(), player:getPlayer()) then 
+		if getLookingAt(players[i]:getPlayer(), player:getPlayer()) and game.targetPlayer(player, players[i], false) then 
 			players[i]:setVariable("abilityLock", true) 
 			game.sendActionBarMessage(players[i]:getPlayer(), "§c능력 봉인됨!")
 		else players[i]:setVariable("abilityLock", false) end

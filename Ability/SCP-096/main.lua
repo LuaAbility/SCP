@@ -33,7 +33,7 @@ function seeCheck(player)
 	
 	player:setVariable("SCP096-targetPlayerName", nil)
 	for i = 1, #players do
-		if not players[i]:getPlayer():isDead() and getLookingAt(players[i]:getPlayer(), player:getPlayer(), 0.7) and getLookingAt(player:getPlayer(), players[i]:getPlayer(), 0.7) then
+		if getLookingAt(players[i]:getPlayer(), player:getPlayer(), 0.7) and getLookingAt(player:getPlayer(), players[i]:getPlayer(), 0.7) and game.targetPlayer(player, players[i], false)  then
 			player:setVariable("SCP096-passiveCount", 1200)
 			player:setVariable("SCP096-targetPlayerName", players[i]:getPlayer():getName())
 			game.sendMessage(player:getPlayer(), "§2[§aSCP-096§2] §a타겟 플레이어가 §2" .. players[i]:getPlayer():getName() .. "§a님으로 설정되었습니다.")

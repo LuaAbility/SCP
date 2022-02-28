@@ -26,7 +26,7 @@ function seeCheck(player)
 	
 	player:setVariable("SCP173-canMove", true)
 	for i = 1, #players do
-		if not players[i]:getPlayer():isDead() and getLookingAt(players[i]:getPlayer(), player:getPlayer()) then player:setVariable("SCP173-canMove", false) end
+		if getLookingAt(players[i]:getPlayer(), player:getPlayer()) and game.targetPlayer(player, players[i], false) then player:setVariable("SCP173-canMove", false) end
 	end
 end
 
@@ -59,7 +59,7 @@ function cancelOrKill(LAPlayer, event, ability, id)
 	if event:getDamager():getType():toString() == "PLAYER" and event:getEntity():getType():toString() == "PLAYER" then
 		if game.checkCooldown(LAPlayer, game.getPlayer(event:getDamager()), ability, id) then
 			if game.getPlayer(event:getDamager()):getVariable("SCP173-canMove") == false then event:setCancelled(true)
-			else event:setDamage(9999999) end
+			elseif game.targetPlayer(LAPlayer, game.getPlayer(event:getEntity())) then event:setDamage(9999999) end
 		end
 	end
 end

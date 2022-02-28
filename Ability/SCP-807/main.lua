@@ -3,7 +3,7 @@ local effect = import("$.potion.PotionEffectType")
 
 function Init(abilityData)
 	plugin.registerEvent(abilityData, "SCP807-panelty", "PlayerItemConsumeEvent", 0)
-	plugin.registerEvent(abilityData, "아이템 변환", "PlayerInteractEvent", 600)
+	plugin.registerEvent(abilityData, "아이템 변환", "PlayerInteractEvent", 200)
 end
 
 function onEvent(funcTable)

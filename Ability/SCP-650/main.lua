@@ -1,7 +1,7 @@
 local material = import("$.Material")
 
 function Init(abilityData)
-	plugin.registerEvent(abilityData, "깜짝 이동", "PlayerInteractEvent", 1200)
+	plugin.registerEvent(abilityData, "깜짝 이동", "PlayerInteractEvent", 200)
 end
 
 function onEvent(funcTable)
@@ -16,11 +16,14 @@ function seeCheck(LAPlayer, event, ability, id)
 					local players = util.getTableFromList(game.getPlayers())
 					
 					for i = 1, #players do
-						if not players[i]:getPlayer():isDead() and getLookingAt(event:getPlayer(), players[i]:getPlayer(), 0.7) then
+						if getLookingAt(event:getPlayer(), players[i]:getPlayer(), 0.98) then
+							if not game.targetPlayer(LAPlayer, players[i]) then ability:resetCooldown(id) return 0 end
 							if teleportToBack(players[i]:getPlayer(), event:getPlayer()) then return 0
-							else game.sendMessage(event:getPlayer(), "§4[§cSCP-650§4] §c플레이어 뒤에 블럭이 있어 이동 할 수 없습니다.") ability:resetCooldown(id) end
+							else game.sendMessage(event:getPlayer(), "§4[§cSCP-650§4] §c플레이어 뒤에 블럭이 있어 이동 할 수 없습니다.") end
 						end
 					end
+					
+					ability:resetCooldown(id)
 				end
 			end
 		end

@@ -1,7 +1,7 @@
 local attribute = import("$.attribute.Attribute")
 
 function Init(abilityData)
-	plugin.registerEvent(abilityData, "회복", "PlayerInteractEvent", 1200)
+	plugin.registerEvent(abilityData, "회복", "PlayerInteractEvent", 600)
 end
 
 function onEvent(funcTable)
