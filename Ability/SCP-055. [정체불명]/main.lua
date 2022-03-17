@@ -14,7 +14,7 @@ function onTimer(player, ability)
 	local count = player:getVariable("SCP055-useAbility")
 	if count > 0 then 
 		seeCheck(player) 
-		count = count - 2
+		count = count - 1
 		if count <= 0 then unlockAbility(player) end
 	end
 	player:setVariable("SCP055-useAbility", count)

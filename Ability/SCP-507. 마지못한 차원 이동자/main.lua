@@ -13,7 +13,7 @@ function onTimer(player, ability)
 		shuffle(player)
 		player:setVariable("SCP507-randomPassive", util.random(400, 1200)) 
 	end
-	count = count + 2
+	count = count + 1
 	player:setVariable("SCP507-passiveCount", count)
 end
 

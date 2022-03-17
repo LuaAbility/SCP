@@ -22,7 +22,7 @@ function onTimer(player, ability)
 	end
 	if count <= 0 then seeCheck(player) 
 	else 
-		count = count - 2 
+		count = count - 1 
 		if count <= 0 then game.sendMessage(player:getPlayer(), "§2[§aSCP-096§2] §a타겟 플레이어가 리셋됩니다.") end
 		player:setVariable("SCP096-passiveCount", count) 
 	end
