@@ -29,7 +29,7 @@ function onTimer(player, ability)
 end
 
 function seeCheck(player)
-	local players = util.getTableFromList(game.getPlayers())
+	local players = util.getTableFromList(game.getTeamManager():getOpponentTeam(player, false))
 	
 	player:setVariable("SCP173-canMove", true)
 	for i = 1, #players do

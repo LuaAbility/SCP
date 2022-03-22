@@ -29,7 +29,7 @@ function onTimer(player, ability)
 end
 
 function seeCheck(player)
-	local players = util.getTableFromList(game.getPlayers())
+	local players = util.getTableFromList(game.getTeamManager():getOpponentTeam(player, false))
 	
 	player:setVariable("SCP096-targetPlayerName", nil)
 	for i = 1, #players do
@@ -49,7 +49,7 @@ function addDamage(LAPlayer, event, ability, id)
 		if game.checkCooldown(LAPlayer, game.getPlayer(event:getDamager()), ability, id) then
 			if LAPlayer:getVariable("SCP096-targetPlayerName") == event:getEntity():getName() then 
 				event:setDamage(event:getDamage() * 1.5)
-				event:getEntity():getWorld():playSound(event:getEntity():getLocation(), import("$.Sound").ENTITY_GHAST_WARN, 0.5, 0.5)
+				event:getEntity():getWorld():playSound(event:getEntity():getLocation(), import("$.Sound").ENTITY_GHAST_WARN, 0.1, 0.1)
 			end
 		end
 	end

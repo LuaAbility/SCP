@@ -25,7 +25,7 @@ function Reset(player, ability)
 end
 
 function seeCheck(player)
-	local players = util.getTableFromList(game.getPlayers())
+	local players = util.getTableFromList(game.getTeamManager():getOpponentTeam(player, false))
 	
 	for i = 1, #players do
 		if getLookingAt(players[i]:getPlayer(), player:getPlayer()) and game.targetPlayer(player, players[i], false) then 
@@ -39,7 +39,7 @@ function unlockAbility(player)
 	game.sendMessage(player:getPlayer(), "§2[§aSCP-055§2] §a능력 시전 시간이 종료되었습니다. (능력 봉인)")
 	player:getPlayer():getWorld():spawnParticle(import("$.Particle").SMOKE_LARGE, player:getPlayer():getLocation():add(0,1,0), 100, 0.5, 1, 0.5, 0.2)
 	player:getPlayer():getWorld():playSound(player:getPlayer():getLocation(), import("$.Sound").BLOCK_BEACON_ACTIVATE, 0.5, 1)
-	local players = util.getTableFromList(game.getPlayers())
+	local players = util.getTableFromList(game.getTeamManager():getOpponentTeam(player, false))
 	
 	for i = 1, #players do
 		players[i]:removeVariable("abilityLock")

@@ -15,7 +15,7 @@ function invisible(player, enable)
 	local players = util.getTableFromList(game.getAllPlayers())
 	for i = 1, #players do
 		if players[i] ~= player then
-			if enable and game.targetPlayer(player, players[i], false) then player:getPlayer():hidePlayer(plugin.getPlugin(), players[i]:getPlayer())
+			if enable and game.targetPlayer(player, players[i], false, true) then player:getPlayer():hidePlayer(plugin.getPlugin(), players[i]:getPlayer())
 			else player:getPlayer():showPlayer(plugin.getPlugin(), players[i]:getPlayer()) end
 		end
 	end
