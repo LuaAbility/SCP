@@ -22,6 +22,7 @@ end
 
 function Reset(player, ability)
 	if player:getVariable("SCP055-useAbility") ~= nil and player:getVariable("SCP055-useAbility") > 0 then unlockAbility(player) end
+	game.sendActionBarMessageToAll("SCP055", "")
 end
 
 function seeCheck(player)
@@ -30,8 +31,11 @@ function seeCheck(player)
 	for i = 1, #players do
 		if getLookingAt(players[i]:getPlayer(), player:getPlayer()) and game.targetPlayer(player, players[i], false) then 
 			players[i]:setVariable("abilityLock", true) 
-			game.sendActionBarMessage(players[i]:getPlayer(), "§c능력 봉인됨!")
-		else players[i]:setVariable("abilityLock", false) end
+			game.sendActionBarMessage(players[i]:getPlayer(), "SCP055", "§c능력 봉인됨!")
+		else 
+			players[i]:setVariable("abilityLock", false)
+			game.sendActionBarMessage(players[i]:getPlayer(), "SCP055", "")			
+		end
 	end
 end
 
@@ -40,10 +44,11 @@ function unlockAbility(player)
 	player:getPlayer():getWorld():spawnParticle(import("$.Particle").SMOKE_LARGE, player:getPlayer():getLocation():add(0,1,0), 100, 0.5, 1, 0.5, 0.2)
 	player:getPlayer():getWorld():playSound(player:getPlayer():getLocation(), import("$.Sound").BLOCK_BEACON_ACTIVATE, 0.5, 1)
 	local players = util.getTableFromList(game.getTeamManager():getOpponentTeam(player, false))
-	
 	for i = 1, #players do
 		players[i]:removeVariable("abilityLock")
 	end
+	
+	game.sendActionBarMessageToAll("SCP055", "")
 end
 
 function enableAbility(LAPlayer, event, ability, id)

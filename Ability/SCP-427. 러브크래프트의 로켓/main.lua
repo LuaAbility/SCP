@@ -15,11 +15,15 @@ function onTimer(player, ability)
 	end
 	
 	local count = player:getVariable("SCP427-count")
-	if count >= 7 then game.sendActionBarMessage(player:getPlayer(), "§a능력 사용 횟수 §6: §4" .. player:getVariable("SCP427-count") .. "회")
-	elseif count >= 4 then game.sendActionBarMessage(player:getPlayer(), "§a능력 사용 횟수 §6: §c" .. player:getVariable("SCP427-count") .. "회")
-	else game.sendActionBarMessage(player:getPlayer(), "§a능력 사용 횟수 §6: §b" .. player:getVariable("SCP427-count") .. "회") end
+	if count >= 7 then game.sendActionBarMessage(player:getPlayer(), "SCP427", "§a능력 사용 횟수 §6: §4" .. player:getVariable("SCP427-count") .. "회")
+	elseif count >= 4 then game.sendActionBarMessage(player:getPlayer(), "SCP427", "§a능력 사용 횟수 §6: §c" .. player:getVariable("SCP427-count") .. "회")
+	else game.sendActionBarMessage(player:getPlayer(), "SCP427", "§a능력 사용 횟수 §6: §b" .. player:getVariable("SCP427-count") .. "회") end
 	player:getPlayer():setSaturatedRegenRate(99999999999)
 	player:getPlayer():setUnsaturatedRegenRate(99999999999)
+end
+
+function Reset(player, ability)
+	game.sendActionBarMessageToAll("SCP427", "")
 end
 
 function heal(LAPlayer, event, ability, id)

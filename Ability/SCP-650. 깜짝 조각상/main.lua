@@ -16,7 +16,7 @@ function seeCheck(LAPlayer, event, ability, id)
 					local players = util.getTableFromList(game.getTeamManager():getOpponentTeam(LAPlayer, false))
 					
 					for i = 1, #players do
-						if getLookingAt(event:getPlayer(), players[i]:getPlayer(), 0.98) then
+						if getLookingAt(event:getPlayer(), players[i]:getPlayer(), 0.95) then
 							if not game.targetPlayer(LAPlayer, players[i], true, true) then ability:resetCooldown(id) return 0 end
 							if teleportToBack(players[i]:getPlayer(), event:getPlayer()) then return 0
 							else game.sendMessage(event:getPlayer(), "§4[§cSCP-650§4] §c플레이어 뒤에 블럭이 있어 이동 할 수 없습니다.") end

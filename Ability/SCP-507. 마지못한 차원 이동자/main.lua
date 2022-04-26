@@ -4,14 +4,14 @@ function onTimer(player, ability)
 	
 	if player:getVariable("SCP507-passiveCount") == nil then 
 		player:setVariable("SCP507-passiveCount", 0) 
-		player:setVariable("SCP507-randomPassive", util.random(400, 1200)) 
+		player:setVariable("SCP507-randomPassive", util.random(200, 400)) 
 	end
 	local count = player:getVariable("SCP507-passiveCount")
 	local maxCount = player:getVariable("SCP507-randomPassive")
 	if count >= maxCount then 
 		count = 0
 		shuffle(player)
-		player:setVariable("SCP507-randomPassive", util.random(400, 1200)) 
+		player:setVariable("SCP507-randomPassive", util.random(200, 400)) 
 	end
 	count = count + 1
 	player:setVariable("SCP507-passiveCount", count)
@@ -21,7 +21,6 @@ function shuffle(player)
 	local players = util.getTableFromList(game.getPlayers())
 	
 	for i = 1, 100 do
-		
 		local randomIndex = util.random(1, #players)
 		local temp = players[randomIndex]
 		players[randomIndex] = players[1]
@@ -30,7 +29,7 @@ function shuffle(player)
 	
 	for i = 1, #players do
 		if players[i] ~= player then
-			local loc = players[i]:getPlayer():getLocation():add(util.random(-10, 10), 0, util.random(-10, 10))
+			local loc = players[i]:getPlayer():getLocation():add(util.random(-5, 5), 0, util.random(-5, 5))
 			if checkMat(loc:getWorld():getBlockAt(loc:add(0, 1, 0)):getType()) or checkMat(loc:getWorld():getBlockAt(loc:add(0, 2, 0)):getType()) then
 				loc:setY(loc:getWorld():getHighestBlockYAt(loc:getX(), loc:getZ()))
 			end
